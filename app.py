@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import os
 
-from tabs import tab_data, tab_sentimen
+from tabs import tab_clustering, tab_data, tab_sentimen
 
 st.set_page_config(page_title="Dashboard Analisis PLN", layout="wide")
 st.title("Dashboard Analisis PLN & Pemadaman")
@@ -28,7 +28,7 @@ with tab2:
     tab_sentimen.render_tab_sentimen(st.session_state['df_utama'])
 
 with tab3:
-    st.write("Bagian Clustering (Sedang dikerjakan)")
+    tab_clustering.render_tab_clustering(st.session_state['df_utama'])
 
 with tab4:
     st.write("Bagian Regresi (Sedang dikerjakan)")
