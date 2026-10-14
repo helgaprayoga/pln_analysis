@@ -1,16 +1,19 @@
 import streamlit as st
 import pandas as pd
-import os
+from pathlib import Path
 
-from tabs import tab_clustering, tab_data, tab_sentimen
+from tabs import tab_clustering, tab_data, tab_regresi, tab_sentimen
+
+
+DATA_DIR = Path(__file__).resolve().parent / "data"
 
 st.set_page_config(page_title="Dashboard Analisis PLN", layout="wide")
 st.title("Dashboard Analisis PLN & Pemadaman")
 
 @st.cache_data
 def load_default_data():
-    file_path = 'merged_clean_sentimen.csv'
-    if os.path.exists(file_path):
+    file_path = DATA_DIR / "merged_clean_sentimen.csv"
+    if file_path.exists():
         return pd.read_csv(file_path)
     return None
 
@@ -28,7 +31,7 @@ with tab2:
     tab_sentimen.render_tab_sentimen(st.session_state['df_utama'])
 
 with tab3:
-    tab_clustering.render_tab_clustering(st.session_state['df_utama'])
+    tab_clustering.render_tab_clustering()
 
 with tab4:
-    st.write("Bagian Regresi (Sedang dikerjakan)")
+    tab_regresi.render_tab_regression()
